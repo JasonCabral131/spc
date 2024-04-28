@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "service-plus-connect",
+    "name": "SPC",
     "slug": "service-plus-connect",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -15,16 +15,22 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "serviceplus.com"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "serviceplus.com"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "packagerOpts": {
+      "sourceExts": ["js", "jsx", "svgx", "ts", "tsx", "svg"],
+      "transformer": "node_modules/react-native-svg-transformer/index.js"
     }
   }
 }
