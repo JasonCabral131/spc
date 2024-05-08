@@ -30,7 +30,7 @@ import Ratings from './Ratings';
 import Reviewer from './Reviewer';
 import Footer from './Footer';
 type props = NativeStackScreenProps<RootStackParamList, 'ServiceDetails'>;
-
+type AllReviewType = { review: string; reviews: Review[] };
 const ServiceDetailsScreen: React.FC<props> = ({ route }) => {
 	const inset = useSafeAreaInsets();
 	const { serviceID, serviceTypeID } = route?.params;
@@ -39,7 +39,7 @@ const ServiceDetailsScreen: React.FC<props> = ({ route }) => {
 		data.find((el) => el?._id == serviceID)?.services || []
 	)?.find((el) => el?._id === serviceTypeID) as ServiceType;
 
-	const reviews: { review: string; reviews: Review[] }[] = [];
+	const reviews: AllReviewType[] = [];
 	if (service?.reviews) {
 		Object.keys(service?.reviews).forEach((review) => {
 			const reviewScore = parseInt(review);
@@ -56,7 +56,7 @@ const ServiceDetailsScreen: React.FC<props> = ({ route }) => {
 	const handleBadgePress = useCallback((label: string) => {
 		setCurrent(label);
 	}, []);
-	const userReviews =
+	let userReviews =
 		current === 'All'
 			? allReviews
 			: reviews.find((el) => el?.review === current)?.reviews || [];
@@ -64,6 +64,9 @@ const ServiceDetailsScreen: React.FC<props> = ({ route }) => {
 		return <Reviewer data={item} />;
 	}, []);
 	const handleBook = () => {};
+	userReviews = userReviews.sort(
+		(a: any, b: any) => parseInt(b.review) - parseInt(a.review)
+	);
 	return (
 		<BaseScreen>
 			<VStack
@@ -131,6 +134,7 @@ const ServiceDetailsScreen: React.FC<props> = ({ route }) => {
 									labels={[{ review: 'All' }, ...reviews].map(
 										(el) => el?.review
 									)}
+									active={current}
 								/>
 							</View>
 						</VStack>

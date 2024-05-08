@@ -15,4 +15,5 @@ export type RootStackParamList = {
 		bgColor?: string;
 		fullScreen?: boolean;
 	};
+	OrderCart: undefined;
 };

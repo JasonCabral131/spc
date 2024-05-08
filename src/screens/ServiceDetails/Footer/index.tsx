@@ -3,10 +3,15 @@
 import React from 'react';
 import { HStack, Pressable, Text, VStack } from 'native-base';
 import Fonts from '../../../fixture/fonts';
+import { useNavigation, useRoute } from '@react-navigation/native';
 type props = {
 	onPress: () => any;
 };
 const Footer: React.FC<props> = ({ onPress }) => {
+	const navigation = useNavigation();
+	const handleNavigate = () => {
+		navigation.navigate('OrderCart');
+	};
 	return (
 		<VStack
 			mt={4}
@@ -37,6 +42,7 @@ const Footer: React.FC<props> = ({ onPress }) => {
 					_pressed={{ opacity: 0.5 }}
 					rounded={'full'}
 					px={7}
+					onPress={handleNavigate}
 					py={2}>
 					<Text
 						color={'white'}

@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { HStack, Pressable, ScrollView, Text } from 'native-base';
 import Fonts from '../../../fixture/fonts';
 import SVG1 from '../../../assets/svgs/solar-star.svg';
@@ -8,17 +8,26 @@ import SVG2 from '../../../assets/svgs/solar_star-white.svg';
 type props = {
 	onPress: (val: string) => void;
 	labels: string[];
+	active: string;
 };
 
-const BadgeTabButton: React.FC<props> = ({ onPress, labels }) => {
-	const [activeTab, setActive] = useState(labels[0]);
+const BadgeTabButton: React.FC<props> = ({
+	onPress,
+	labels,
+	active = 'All',
+}) => {
+	const [activeTab, setActive] = useState(active);
+	const handleCallBack = useCallback((val: string) => {
+		setActive(val);
+		onPress(val);
+	}, []);
 	return (
 		<ScrollView showsHorizontalScrollIndicator={false}>
 			<HStack space={2}>
 				{labels?.map((el) => {
 					return (
 						<Pressable
-							onPress={() => setActive(el)}
+							onPress={() => handleCallBack(el)}
 							_pressed={{ opacity: 0.5 }}
 							key={el}
 							borderWidth={'.5px'}

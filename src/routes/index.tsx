@@ -8,6 +8,7 @@ import Splash from '../screens/Splash';
 import Service from '../screens/Service';
 import ServiceDetails from '../screens/ServiceDetails';
 import TransparentModal from '../screens/Modal/TransparentModal';
+import OrderCart from '../screens/OrderCart';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 declare global {
 	namespace ReactNavigation {
@@ -43,6 +44,10 @@ const Routes = () => {
 					presentation: 'transparentModal',
 					animation: 'fade',
 				}}
+			/>
+			<Stack.Screen
+				name='OrderCart'
+				component={OrderCart}
 			/>
 		</Stack.Navigator>
 	);
